@@ -13,6 +13,25 @@ const pool = new Pool({
     ssl: { rejectUnauthorized: false }
 });
 
+// TABLO YOKSA OTOMATİK OLUŞTURAN FONKSİYON
+const tabloyuHazirla = async () => {
+    try {
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS basvurular (
+                id SERIAL PRIMARY KEY,
+                oyuncu_adi TEXT NOT NULL,
+                email TEXT NOT NULL,
+                mesaj TEXT NOT NULL,
+                tarih TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
+        console.log("Veritabanı tablosu hazır.");
+    } catch (err) {
+        console.error("Tablo oluşturulurken hata:", err);
+    }
+};
+tabloyuHazirla();
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -31,25 +50,25 @@ app.post('/gonder', async (req, res) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'sunayseyidli01@gmail.com', // Kendi Gmail adresini yaz
-                pass: 'dqbj lopd pgrm dbme'    // Aldığın 16 haneli uygulama şifresini yaz
+                user: 'sunayseyidli01@gmail.com', // Kendi Gmail adresin
+                pass: 'dqbj lopd pgrm dbme'    // 16 haneli uygulama şifren
             }
         });
 
         await transporter.sendMail({
             from: '"MC Kayıt" <noreply@gmail.com>',
-            to: 'sunayseyidli01@gmail.com', // Mesaj nereye gelsin?
+            to: 'sunayseyidli01@gmail.com',
             subject: `⚔️ Yeni Başvuru: ${oyuncu_adi}`,
             text: `Oyuncu: ${oyuncu_adi}\nEmail: ${email}\nMesaj: ${mesaj}`
         });
 
-        res.send('<body style="background:#000;color:#5f5;text-align:center;padding-top:50px;font-family:monospace;"><h1>BASARILI!</h1><p>Veriler SQLe kaydedildi ve mail gonderildi.</p><a href="/" style="color:#fff;">Geri Don</a></body>');
+        res.send('<body style="background:#000;color:#5f5;text-align:center;padding-top:50px;font-family:monospace;"><h1>BAŞARILI!</h1><p>Kayıt hem veritabanına alındı hem de mail gönderildi.</p><a href="/" style="color:#fff;">Geri Dön</a></body>');
 
     } catch (err) {
         console.error(err);
-        res.status(500).send("Hata: " + err.message);
+        res.status(500).send("Bir hata oluştu: " + err.message);
     }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Sunucu ${PORT} aktif.`));
+app.listen(PORT, () => console.log(`Sunucu aktif.`));
