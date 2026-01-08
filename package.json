@@ -1,7 +1,7 @@
 {
-  "name": "mc-destek-sql",
+  "name": "minecraft-kayit-sistemi",
   "version": "1.0.0",
-  "description": "Minecraft Sunucu Kayıt Sistemi",
+  "description": "SQL ve Gmail destekli kayit formu",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
