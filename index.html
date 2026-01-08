@@ -3,56 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Sunucu Kayıt</title>
+    <title>Minecraft Kayıt & Destek</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
-            background: #1e1e1e url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            background: #1a1a1a;
             font-family: 'Press Start 2P', cursive;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            color: white;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; margin: 0; color: white;
         }
-        .container {
-            background-color: rgba(0, 0, 0, 0.9);
-            padding: 30px;
-            border: 4px solid #555;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 20px #000;
+        .box {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px; border: 4px solid #555;
+            width: 90%; max-width: 400px; text-align: center;
         }
-        h2 { color: #55FF55; font-size: 18px; text-align: center; margin-bottom: 25px; }
-        .group { margin-bottom: 15px; }
-        label { display: block; font-size: 10px; margin-bottom: 8px; color: #AAA; }
+        h2 { color: #55FF55; font-size: 16px; margin-bottom: 20px; }
+        .inp-group { margin-bottom: 15px; text-align: left; }
+        label { font-size: 9px; color: #AAA; display: block; margin-bottom: 5px; }
         input, textarea {
-            width: 100%; padding: 12px; background: #333; border: 2px solid #555;
+            width: 100%; padding: 12px; background: #222; border: 2px solid #444;
             color: #fff; font-family: 'Press Start 2P', cursive; font-size: 10px; box-sizing: border-box;
         }
         button {
             width: 100%; padding: 15px; background: #55FF55; border: none;
-            color: #000; font-family: 'Press Start 2P', cursive; cursor: pointer; margin-top: 10px;
+            color: #000; font-family: 'Press Start 2P', cursive; cursor: pointer;
         }
-        button:hover { background: #33aa33; }
+        button:hover { background: #33cc33; }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="box">
         <h2>SUNUCU KAYIT</h2>
         <form action="/gonder" method="POST">
-            <div class="group">
-                <label>OYUNCU ADI:</label>
+            <div class="inp-group">
+                <label>OYUNCU ADIN:</label>
                 <input type="text" name="oyuncu_adi" required>
             </div>
-            <div class="group">
+            <div class="inp-group">
                 <label>GMAIL ADRESİN:</label>
                 <input type="email" name="email" required>
             </div>
-            <div class="group">
-                <label>MESAJIN:</label>
-                <textarea name="mesaj" rows="4" required></textarea>
+            <div class="inp-group">
+                <label>MESAJIN / TALEBİN:</label>
+                <textarea name="mesaj" rows="3" required></textarea>
             </div>
             <button type="submit">GÖNDER</button>
         </form>
